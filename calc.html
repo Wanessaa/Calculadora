@@ -1,0 +1,116 @@
+<html>
+    <head>
+        <h1>Calculadora: </h1>
+        <style>   
+             h1{ color: rgb(13, 8, 15) } 
+            h1{ background-color: rgb(59, 136, 33) }                     
+            body { background-color: rgb(177, 209, 112) } 
+            button { background-color:rgb(216, 114, 114) }    
+            input { background-color: rgb(241, 241, 155) }
+           
+
+            </style>
+       <script> 
+           var numeroparte1="";
+           var operacao="";
+           var numeroparte2="";
+           var teste= true;
+
+           function adicionarNumero(numero){
+               if(teste == true) {                  
+                   numeroparte1 += numero;
+                   console.log(numeroparte1);
+                   this.numeroparte1=numeroparte1;
+                    exibirNaTela();
+                }
+               else{
+                   numeroparte2 += numero;
+                   console.log(numeroparte2);
+                   this.numeroparte2=numeroparte2;
+                   exibirNaTela();
+                }
+            }
+            function adicionarOperacao(operacao){
+                this.operacao=operacao;
+                console.log(operacao);
+                teste=false; // parâmetro para saber em qual membro adicionar o valor da função adicionarNumero
+                exibirNaTela();
+            }
+            function exibirNaTela(){                              
+               var meuPainelNumerico = document.getElementById("painelNumerico");
+               meuPainelNumerico.value=numeroparte1+operacao+numeroparte2;
+            }
+            function efetuarCalculo(){                                                 
+              var r =0;
+              r=eval(numeroparte1+operacao+numeroparte2);
+              var meuPainelNumerico = document.getElementById("painelNumerico");
+              meuPainelNumerico.value=r;
+            }
+            function deletarValoresNoPainel(){
+              numeroparte1="";
+              numeroparte2="";
+              operacao="";
+              teste=true;
+              exibirNaTela();
+              
+            }
+            function calcularPorcetagem(){                     // apenas um algarismo ex: 5% = 0.05;
+              if(teste==true){
+                res= eval(numeroparte1/100);
+                var meuPainelNumerico = document.getElementById("painelNumerico");
+                meuPainelNumerico.value=res;
+               }
+            }
+            function inverterSinal(){
+              if(teste==true ){
+                var res= eval(numeroparte1*-1);
+                var meuPainelNumerico = document.getElementById("painelNumerico");
+                numeroparte1=res;
+                meuPainelNumerico.value= res;
+               }
+              if(teste==false){
+                this.numeroparte2= eval(numeroparte2*-1);
+                var res=numeroparte1+operacao+"("+(numeroparte2)+")";
+                var meuPainelNumerico = document.getElementById("painelNumerico");
+                meuPainelNumerico.value= res;
+                console.log(res);
+                console.log(operacao);
+               }
+            }
+       </script>
+    </head>
+    <body>  
+        <input id="painelNumerico" disabled/>
+        <table>
+            <tr>
+                <td>  <button onclick= "deletarValoresNoPainel()">C</button>  </td>
+                <td>  <button onclick="calcularPorcetagem()" >%</button>  </td>
+                <td>  <button  onclick="adicionarOperacao('/')" >/</button>  </td>
+            </tr>
+            <tr>
+                <td>  <button onclick="adicionarNumero(7)">7</button>  </td>
+                <td>  <button onclick="adicionarNumero(8)">8</button>  </td>
+                <td>  <button onclick="adicionarNumero(9)">9</button>  </td>
+                <td>  <button onclick= "adicionarOperacao('*')" >*</button>  </td>
+            </tr>  
+                <tr>
+                <td>  <button  onclick="adicionarNumero(4)">4</button>  </td>
+                <td>  <button  onclick="adicionarNumero(5)">5</button>  </td>
+                <td>  <button  onclick="adicionarNumero(6)">6</button>  </td>
+                <td>  <button  onclick="adicionarOperacao('-')">-</button>  </td>
+            </tr>
+            <tr>
+                <td>  <button onclick="adicionarNumero(1)">1</button>  </td>
+                <td>  <button onclick="adicionarNumero(2)">2</button>  </td>
+                <td>  <button onclick="adicionarNumero(3)">3 </button>  </td>
+                <td>  <button onclick="adicionarOperacao('+')">+</button>  </td>
+            </tr>
+                <tr>
+                <td>  <button onclick="adicionarNumero('.')">.</button>  </td>
+                <td>  <button onclick="adicionarNumero(0)">0</button>  </td>
+                <td>  <button onclick="inverterSinal()">+/-</button>  </td>
+                <td>  <button onclick= "efetuarCalculo()">=</button>  </td>
+            </tr>
+        </table>
+   </body>
+</html>
